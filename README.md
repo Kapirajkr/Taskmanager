@@ -4,7 +4,7 @@ A full-stack team task management application with role-based access control (Ad
 
 ## 🌐 Live Demo
 
-- **Frontend:** [https://taskmanager-kapi.vercel.app](https://taskmanager-kapi.vercel.app)
+- **Frontend:** [https://task-manager-eight-gules-91.vercel.app/]
 - **Backend API:** [https://kind-harmony.up.railway.app](https://kind-harmony.up.railway.app)
 
 ## ✨ Features
