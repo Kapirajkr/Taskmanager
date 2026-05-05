@@ -1,2 +1,0 @@
-backend :- taskmanager-production-c53c.up.railway.app
-frontend:- https://69f9524a15e648e5b12a28cf--charming-rabanadas-9bf81d.netlify.app/
