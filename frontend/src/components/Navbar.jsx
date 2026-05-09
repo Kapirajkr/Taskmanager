@@ -1,16 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    window.location.href = '/login';
-  };
-
-  const navigateTo = (path) => {
-    window.location.href = path;
+    navigate('/login');
   };
 
   const navStyles = {
@@ -44,7 +42,8 @@ function Navbar() {
     textDecoration: 'none',
     padding: '8px 16px',
     borderRadius: '5px',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
+    cursor: 'pointer'
   };
 
   const userInfoStyles = {
@@ -68,22 +67,13 @@ function Navbar() {
     <nav style={navStyles}>
       <div style={brandStyles}>📋 Task Manager</div>
       <div style={linkContainerStyles}>
-        <span
-          onClick={() => navigateTo('/dashboard')}
-          style={{...linkStyles, cursor: 'pointer'}}
-        >
+        <span onClick={() => navigate('/dashboard')} style={linkStyles}>
           Dashboard
         </span>
-        <span
-          onClick={() => navigateTo('/projects')}
-          style={{...linkStyles, cursor: 'pointer'}}
-        >
+        <span onClick={() => navigate('/projects')} style={linkStyles}>
           Projects
         </span>
-        <span
-          onClick={() => navigateTo('/tasks')}
-          style={{...linkStyles, cursor: 'pointer'}}
-        >
+        <span onClick={() => navigate('/tasks')} style={linkStyles}>
           Tasks
         </span>
         <span style={userInfoStyles}>👋 {user?.name} ({user?.role})</span>
