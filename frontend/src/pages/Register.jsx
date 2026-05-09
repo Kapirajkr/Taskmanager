@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Register() {
@@ -9,15 +10,16 @@ function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
+
     try {
       await register(name, email, password, role);
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } catch (err) {
       setError(err.error || 'Registration failed. Email might already exist.');
     } finally {
@@ -89,9 +91,9 @@ function Register() {
     <div style={containerStyles}>
       <div style={cardStyles}>
         <h1 style={titleStyles}>Register</h1>
-        
+
         {error && <div style={errorStyles}>{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -129,9 +131,15 @@ function Register() {
             {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
-        
+
         <div style={linkStyles}>
-          Already have an account? <a href="/login" style={{ color: '#667eea' }}>Login</a>
+          Already have an account?{' '}
+          <span
+            onClick={() => navigate('/login')}
+            style={{ color: '#667eea', cursor: 'pointer' }}
+          >
+            Login
+          </span>
         </div>
       </div>
     </div>
