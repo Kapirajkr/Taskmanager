@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {
@@ -7,15 +8,16 @@ function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
+
     try {
       await login(email, password);
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } catch (err) {
       setError(err.error || 'Login failed. Please check your credentials.');
     } finally {
@@ -87,9 +89,9 @@ function Login() {
     <div style={containerStyles}>
       <div style={cardStyles}>
         <h1 style={titleStyles}>Task Manager</h1>
-        
+
         {error && <div style={errorStyles}>{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -111,9 +113,15 @@ function Login() {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        
+
         <div style={linkStyles}>
-          New user? <a href="/register" style={{ color: '#667eea' }}>Register here</a>
+          New user?{' '}
+          <span
+            onClick={() => navigate('/register')}
+            style={{ color: '#667eea', cursor: 'pointer' }}
+          >
+            Register here
+          </span>
         </div>
       </div>
     </div>
